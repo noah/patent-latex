@@ -49,6 +49,11 @@
         family=application,
         prefix=application@
 }
+\DeclareStringOption{Author}
+\DeclareStringOption{AuthorRegistrationNumber}
+\DeclareStringOption{AuthorAddress}
+\DeclareStringOption{AuthorTelephone}
+%
 \DeclareStringOption{Number}
 \DeclareStringOption{FilingDate}
 \DeclareStringOption{FirstNamedInventorFirstName}
@@ -185,9 +190,9 @@
             Dated: \application@AmendmentDate\\
             \columnbreak\\
             Respectfully submitted,\\
-            By \underline{/\application@Author \application@RegistrationNumber/}\\
+            By \underline{/\application@Author\ \application@AuthorRegistrationNumber/}\\
             \application@Author\\
-            Registration No.: \application@RegistrationNumber\\
+            Registration No.: \application@AuthorRegistrationNumber\\
             \application@AuthorAddress\\
             \application@AuthorTelephone\\
             Attorney for Applicant
