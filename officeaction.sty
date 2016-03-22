@@ -1,0 +1,204 @@
+\ProvidesPackage{officeaction}[2016/03/21 v0.1 a LaTeX Package for creating USPTO Office Action responses]
+%-----------------------------------
+% 
+%
+%
+% officeaction.sty - a LaTeX Package for creating USPTO Office Action responses.
+% -----------------------------------------------------------------------
+% Author:                   Noah K. Tilton, Esq. <code@tilton.co>
+% License:                  GNU General Public License v3
+% -----------------------------------------------------------------------
+%
+% DISCLAIMER:   THIS DOCUMENT MERELY GENERATES A SKELETON OF A FORMAL
+% LEGAL DOCUMENT AND IS INTENDED FOR ENTERTAINMENT/ ILLUSTRATIVE/ SAMPLE
+% PURPOSES ONLY AND MUST NOT BE CONSTRUED AS LEGAL ADVICE. THE CONTENT
+% HEREIN IS NOT INTENDED TO BE A SUBSTITUTE FOR COMPETENT LEGAL COUNSEL
+% ON ANY SUBJECT MATTER.  NO PERSON SHOULD ACT OR REFRAIN FROM ACTING ON
+% THE BASIS OF INFORMATION CONTAINED HEREIN.  ABSOLUTELY NO ATTORNEY-
+% CLIENT RELATIONSHIP WILL BE FORMED BASED ON YOUR USE OF THIS DOCUMENT.
+%
+% -----------------------------------------------------------------------
+%
+% TODO:
+%   - Work out how to generalize the functions etc herein to make the
+%   template useful for final office actions, patents, preliminary
+%   amendments, etc.
+%   - Examples/ documentation
+%
+\RequirePackage{float}
+\RequirePackage{fancyhdr}
+\RequirePackage{libertine}
+\RequirePackage{fontspec}
+\RequirePackage{fullpage}
+\RequirePackage{lastpage}
+\RequirePackage[margin=1in,headheight=1em,headsep=3em]{geometry}
+\RequirePackage{multicol}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{setspace}
+\RequirePackage{enumitem}
+\RequirePackage{kvoptions}
+\RequirePackage{pgffor}
+\RequirePackage{etoolbox}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{indentfirst} 
+\RequirePackage{minted}
+\RequirePackage{caption}
+\RequirePackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+%-----------------------------------
+\SetupKeyvalOptions{%
+        family=application,
+        prefix=application@
+}
+\DeclareStringOption{Number}
+\DeclareStringOption{FilingDate}
+\DeclareStringOption{FirstNamedInventorFirstName}
+\DeclareStringOption{FirstNamedInventorLastName}
+\DeclareStringOption{DocketNumber}
+\DeclareStringOption{ConfirmationNumber}
+\DeclareStringOption{Examiner}
+\DeclareStringOption{ArtUnit}
+\DeclareStringOption{NotificationDate}
+\DeclareStringOption{Title}
+\DeclareStringOption{AmendmentDate}
+%
+\ProcessKeyvalOptions{application}
+
+%-----------------------------------
+% allow linebreaks in pgffor lists
+\patchcmd[\long]{\pgffor@normal@list}{}{}{}{}
+\patchcmd[\long]{\pgffor@scanone}{}{}{}{}
+\patchcmd[\long]{\pgffor@dots@in@}{}{}{}{}
+%-----------------------------------
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\multicolsep}{1pt} % 50% of original values
+\setlength\parindent{4em}
+\onehalfspacing
+%-----------------------------------
+\setmainfont{Linux Libertine O}
+\setmonofont[Scale=MatchLowercase]{Monaco}
+%-----------------------------------
+% format section headers
+\titleformat{\section}[block]{\filcenter\bf\underline}{\thesection}{1em}{\uline{\MakeUppercase{#1}}}
+\titleformat{\subsection}[block]{\bf\underline}{\thesection}{1em}{\uline{#1}}
+\titleformat{\subsubsection}[block]{\underline}{\thesection}{1em}{\uline{#1}}
+% format paragraphs to mimic "subsubsubsection" (level beneath
+% subsubsection)
+\titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%-----------------------------------
+
+%
+%
+%
+
+
+
+\newcommand{\OfficeActionHeaderFooter}{%
+        \lhead{\scriptsize{%
+                Application No. \application@Number{}\\
+                Amendment dated \application@AmendmentDate{}\\
+                Reply to Office Action of \application@NotificationDate{}}
+        }
+        \rhead{
+                \scriptsize{\bf \textemdash{}\ {\em DRAFT\ \textemdash{}\ NOT FOR ENTRY}\ \textemdash{}}\\
+                \ifnum\thepage=1
+                \scriptsize{Docket No.: ******--\application@DocketNumber\\(PATENT)}
+                \else
+                \scriptsize{Docket No.: ******--\application@DocketNumber}
+        \fi}
+        \cfoot{Page\ {\bf \thepage}\ of\ {\bf~\pageref{LastPage}}}
+}
+%-----------------------------------
+
+
+\newcommand{\Title}[1]{%
+        \begin{center}
+                {\bf IN THE UNITED STATES PATENT AND TRADEMARK OFFICE}\\
+        \end{center}
+        \rule{.48\textwidth}{.2mm}
+        \begin{multicols}{2}
+                \noindent
+                In re Patent Application of:\\
+                \application@FirstNamedInventorFirstName\ \MakeUppercase{{\bf \application@FirstNamedInventorLastName}}\ et al.\\
+                \newline
+                Application No.: \application@Number\\
+                \newline
+                Filed: \application@FilingDate\\
+                \newline
+                For: \application@Title\\
+                \columnbreak\\
+                Confirmation No.: \application@ConfirmationNumber{}
+                \newline
+                Art Unit: \application@ArtUnit\\
+                \newline
+                Examiner: \application@Examiner{}
+        \end{multicols}
+        \rule[16pt]{.48\textwidth}{.2mm}
+        \section{#1}
+        \noindent{}MS Amendment\\
+        Commissioner for Patents\\
+        P.O. Box 1450\\
+        Alexandria, VA 22313\textemdash{}1450\\
+
+        \noindent{}Dear Madam:
+}
+
+\newcommand{\Intro}{%
+
+        \section{Introductory Comments}
+        \setlength{\parindent}{4em}
+        In response to the Office Action dated \application@NotificationDate, please amend
+        the above-identified U.S. patent application as follows:\\
+
+        {\bf Amendments to the Claims} are reflected in the listing of claims
+        which begins on page~\pageref{claims} of this paper.
+
+        {\bf Remarks} begin on page~\pageref{remarks} of this paper.
+}
+
+\newcommand{\Claims}[2]{%
+        \section{Amendments to the Claims}\label{claims}
+        #1
+        % http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/enumitem/enumitem.pdf
+        \setlength{\parindent}{1in}
+        \begin{enumerate}[itemindent=1in,labelsep=1cm,listparindent=.5in,parsep=0pt]
+                        #2\\
+        \end{enumerate}
+}
+
+
+\newcommand{\Remarks}[1]{%
+    \section{Remarks}\label{remarks}
+
+    \setlength{\parindent}{4em}
+    The following remarks are responsive to the Office Action of
+    \NotificationDate{} (\OAem).\\
+
+    #1
+}
+
+\newcommand{\Signature}{%
+    \begin{multicols}{2}
+            \noindent
+            Dated: \application@AmendmentDate\\
+            \columnbreak\\
+            Respectfully submitted,\\
+            By \underline{/\application@Author \application@RegistrationNumber/}\\
+            \application@Author\\
+            Registration No.: \application@RegistrationNumber\\
+            \application@AuthorAddress\\
+            \application@AuthorTelephone\\
+            Attorney for Applicant
+    \end{multicols}
+}
+
+
+
+%-----------------------------------
+% shorthands
+\newcommand{\OAem}{\textit{Office Action}}
+
+% statutory shorthands
+\newcommand{\ThirtyFiveUSCOneOhTwoAOne}{35 U.S.C. \S{} 102(a)(1)}
