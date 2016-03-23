@@ -27,7 +27,6 @@
 %
 \RequirePackage{float}
 \RequirePackage{fancyhdr}
-\RequirePackage{libertine}
 \RequirePackage{fontspec}
 \RequirePackage{fullpage}
 \RequirePackage{lastpage}
@@ -81,8 +80,9 @@
 \setlength\parindent{4em}
 \onehalfspacing
 %-----------------------------------
-\setmainfont{Linux Libertine O}
-\setmonofont[Scale=MatchLowercase]{Monaco}
+%\RequirePackage{libertine}
+%\setmainfont{Linux Libertine O}
+%\setmonofont[Scale=MatchLowercase]{Monaco}
 %-----------------------------------
 % format section headers
 \titleformat{\section}[block]{\filcenter\bf\underline}{\thesection}{1em}{\uline{\MakeUppercase{#1}}}
@@ -170,6 +170,12 @@
         \setlength{\parindent}{1in}
         \begin{enumerate}[itemindent=1in,labelsep=1cm,listparindent=.5in,parsep=0pt]
                         #2\\
+        \end{enumerate}
+}
+
+\newcommand{\SubClaim}[1]{%
+        \begin{enumerate}[itemindent=.5in,labelsep=1cm,listparindent=.5in,parsep=0pt,label={}]
+            #1
         \end{enumerate}
 }
 
