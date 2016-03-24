@@ -32,7 +32,6 @@
 \RequirePackage{lastpage}
 \RequirePackage[margin=1in,headheight=1em,headsep=3em]{geometry}
 \RequirePackage{multicol}
-\RequirePackage[normalem]{ulem}
 \RequirePackage{setspace}
 \RequirePackage{enumitem}
 \RequirePackage{kvoptions}
@@ -43,6 +42,7 @@
 \RequirePackage{minted}
 \RequirePackage{caption}
 \RequirePackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+\RequirePackage[normalem]{ulem}
 %-----------------------------------
 \SetupKeyvalOptions{%
         family=application,
@@ -60,6 +60,7 @@
 \DeclareStringOption{DocketNumber}
 \DeclareStringOption{ConfirmationNumber}
 \DeclareStringOption{Examiner}
+\DeclareStringOption{ExaminerTitle} % Sir or Madam
 \DeclareStringOption{ArtUnit}
 \DeclareStringOption{NotificationDate}
 \DeclareStringOption{Title}
@@ -87,10 +88,10 @@
 % format section headers
 \titleformat{\section}[block]{\filcenter\bf\underline}{\thesection}{1em}{\uline{\MakeUppercase{#1}}}
 \titleformat{\subsection}[block]{\bf\underline}{\thesection}{1em}{\uline{#1}}
-\titleformat{\subsubsection}[block]{\underline}{\thesection}{1em}{\uline{#1}}
+\titleformat{\subsubsection}[block]{\bf}{\thesection}{1em}{#1}
 % format paragraphs to mimic "subsubsubsection" (level beneath
 % subsubsection)
-\titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+\titleformat{\paragraph}[block]{\normalfont\normalsize}{}{1em}{\uline{#1}}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 %-----------------------------------
 
@@ -98,6 +99,13 @@
 %
 %
 
+
+\newcommand{\IndentedList}[1]{%
+        \begin{enumerate}[listparindent=1.5em,itemindent=1.5em,labelsep=2em]
+                        #1
+        \end{enumerate}
+
+}
 
 
 \newcommand{\OfficeActionHeaderFooter}{%
@@ -113,7 +121,7 @@
                 \else
                 \scriptsize{Docket No.: ******--\application@DocketNumber}
         \fi}
-        \cfoot{Page\ {\bf \thepage}\ of\ {\bf~\pageref{LastPage}}}
+        \cfoot{Page\ {\bf \thepage}\ of{\bf~\pageref{LastPage}}}
 }
 %-----------------------------------
 
@@ -147,7 +155,7 @@
         P.O. Box 1450\\
         Alexandria, VA 22313\textemdash{}1450\\
 
-        \noindent{}Dear Madam:
+        \noindent{}Dear \application@ExaminerTitle:
 }
 
 \newcommand{\Intro}{%
@@ -185,7 +193,7 @@
 
     \setlength{\parindent}{4em}
     The following remarks are responsive to the Office Action of
-    \NotificationDate{} (\OAem).\\
+    \NotificationDate{} (\OAem).
 
     #1
 }
@@ -212,4 +220,5 @@
 \newcommand{\OAem}{\textit{Office Action}}
 
 % statutory shorthands
+\newcommand{\ThirtyFiveUSCOneOhTwo}{35 U.S.C. \S{} 102}
 \newcommand{\ThirtyFiveUSCOneOhTwoAOne}{35 U.S.C. \S{} 102(a)(1)}
