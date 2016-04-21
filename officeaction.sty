@@ -30,7 +30,7 @@
 \RequirePackage{fontspec}
 \RequirePackage{fullpage}
 \RequirePackage{lastpage}
-\RequirePackage[left=1in,right=1in,top=1.5in,bottom=1.5in,headheight=1em,headsep=3em]{geometry}
+\RequirePackage[left=1in,right=1in,top=2in,bottom=1.5in,headheight=30pt,headsep=6em]{geometry}
 \RequirePackage{multicol}
 \RequirePackage{setspace}
 \RequirePackage{enumitem}
@@ -43,10 +43,11 @@
 \RequirePackage{caption}
 \RequirePackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
 \RequirePackage[normalem]{ulem}
+\RequirePackage{dashrule}
 %-----------------------------------
 \SetupKeyvalOptions{%
         family=application,
-        prefix=application@
+        prefix=@application@
 }
 \DeclareStringOption{Author}
 \DeclareStringOption{AuthorRegistrationNumber}
@@ -65,6 +66,7 @@
 \DeclareStringOption{NotificationDate}
 \DeclareStringOption{Title}
 \DeclareStringOption{AmendmentDate}
+\DeclareBoolOption{Draft}
 %
 \ProcessKeyvalOptions{application}
 
@@ -81,37 +83,37 @@
 \onehalfspacing
 %-----------------------------------
 %\RequirePackage{libertine}
-\setmainfont{Linux Libertine O}
-\setmonofont[Scale=MatchLowercase]{Monaco}
+%\setmainfont{Linux Libertine O}
+%\setmonofont[Scale=MatchLowercase]{Monaco}
 %-----------------------------------
 % format section headers
-%\titleformat{\section}[block]{\filcenter\bf\underline}{\thesection}{1em}{\uline{\MakeUppercase{#1}}}
-% \titleformat{\subsection}[block]{\bf\underline}{\thesection}{1em}{\uline{#1}}
-% \titleformat{\subsubsection}[block]{\bf}{\thesection}{1em}{#1}
-% % format paragraphs to mimic "subsubsubsection" (level beneath
-% % subsubsection)
-% \titleformat{\paragraph}[block]{\normalfont\normalsize}{}{1em}{\uline{#1}}
+\titleformat{\section}[block]{\large\filcenter\bf\underline}{\thesection}{1em}{\uline{\MakeUppercase{#1}}}
+\titleformat{\subsection}[block]{\bf\underline}{\thesection}{1em}{\uline{#1}}
+\titleformat{\subsubsection}[block]{\bf}{\thesection}{1em}{#1}
+\titleformat{\paragraph}[block]{\normalfont\normalsize}{}{1em}{\uline{#1}} % format paragraphs to mimic "subsubsubsection" (level beneath subsubsection)
 % \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 %-----------------------------------
-% uncomment to get numbered chapters
-\titleformat{\chapter}[block]{\Large\filcenter\bf\underline}{\thechapter. }{0pt}{\uline{\MakeUppercase{#1}}}
-% \titleformat{\chapter}[block]{\Large\filcenter\bf\underline}{}{0pt}{\uline{\MakeUppercase{#1}}}
+% uncomment to get numbered chapters (book document class)
+%\titleformat{\chapter}[block]{\Large\filcenter\bf\underline}{\thechapter. }{0pt}{\uline{\MakeUppercase{#1}}}
+%\titleformat{\chapter}[block]{\Large\filcenter\bf\underline}{}{0pt}{\uline{\MakeUppercase{#1}}}
 
 %-----------------------------------
 
 \fancypagestyle{plain}{%
         \fancyhf{}
         \fancyhead[R]{%
+                \if@application@Draft% 
                 \scriptsize{\bf \textemdash{}\ {\em DRAFT\ \textemdash{}\ NOT FOR ENTRY}\ \textemdash{}}\\
+                \fi
                 \ifnum\thepage=1
-                \scriptsize{Docket No.: ******--\application@DocketNumber\\(PATENT)}
+                \scriptsize{Docket No.: ******--\@application@DocketNumber\\(PATENT)}
                 \else
-                \scriptsize{Docket No.: ******--\application@DocketNumber}
+                \scriptsize{Docket No.: ******--\@application@DocketNumber}
         \fi}
         \fancyhead[L]{\scriptsize{%
-                Application No. \application@Number{}\\
-                Amendment dated \application@AmendmentDate{}\\
-                Reply to Office Action of \application@NotificationDate{}}
+                Application No. \@application@Number{}\\
+                Amendment dated \@application@AmendmentDate{}\\
+                Reply to Office Action of \@application@NotificationDate{}}
         }
         \fancyfoot[C]{Page\ {\bf \thepage}\ of{\bf~\pageref{LastPage}}}
 }
@@ -126,45 +128,45 @@
         \begin{enumerate}[listparindent=1.5em,itemindent=1.5em,labelsep=2em]
                         #1
         \end{enumerate}
-
 }
 
 
 
 \newcommand{\Title}[1]{%
-        \chapter{In the United States Patent and Trademark Office}
-        \rule{.48\textwidth}{.2mm}
+        \section{In the United States Patent and Trademark Office}
+        \noindent\rule{.5\textwidth}{.2mm}
         \begin{multicols}{2}
                 \noindent
                 In re Patent Application of:\\
-                \application@FirstNamedInventorFirstName\ \MakeUppercase{{\bf \application@FirstNamedInventorLastName}}\ et al.\\
+                \@application@FirstNamedInventorFirstName\
+                \MakeUppercase{{\bf \@application@FirstNamedInventorLastName}}\ et al.\\
                 \newline
-                Application No.: \application@Number\\
+                Application No.: \@application@Number\\
                 \newline
-                Filed: \application@FilingDate\\
+                Filed: \@application@FilingDate\\
                 \newline
-                For: \application@Title\\
+                For: \@application@Title\\
                 \columnbreak\\
-                Confirmation No.: \application@ConfirmationNumber{}
+                Confirmation No.: \@application@ConfirmationNumber{}
                 \newline
-                Art Unit: \application@ArtUnit\\
+                Art Unit: \@application@ArtUnit\\
                 \newline
-                Examiner: \application@Examiner{}
+                Examiner: \@application@Examiner{}
         \end{multicols}
-        \rule[16pt]{.48\textwidth}{.2mm}
-        \chapter{#1}
+        \noindent\rule[16pt]{.5\textwidth}{.2mm}
+        \section{#1}
         \noindent{}MS Amendment\\
         Commissioner for Patents\\
         P.O. Box 1450\\
         Alexandria, VA 22313\textemdash{}1450\\
 
-        \noindent{}Dear \application@ExaminerTitle:
+        \noindent{}Dear \@application@ExaminerTitle:
 }
 
 \newcommand{\Intro}{%
 
-        \chapter{Introductory Comments}
-        In response to the Office Action dated \application@NotificationDate, please amend
+        \section{Introductory Comments}
+        In response to the Office Action dated \@application@NotificationDate, please amend
         the above-identified U.S. patent application as follows:
 
         A {\bf Listing of Claims} reflecting amendments to the claims begins on page~\pageref{claims}.
@@ -173,7 +175,8 @@
 }
 
 \newcommand{\Claims}[2]{%
-        \chapter{Listing of Claims}\label{claims}
+        \pagebreak
+        \section{Listing of Claims}\label{claims}
         #1
         % http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/enumitem/enumitem.pdf
         \setlength{\parindent}{1in}
@@ -190,7 +193,8 @@
 
 
 \newcommand{\Remarks}[1]{%
-    \chapter{Remarks}\label{remarks}
+    \pagebreak
+    \section{Remarks}\label{remarks}
 
     \setlength{\parindent}{4em}
     The following remarks are responsive to the Office Action of
@@ -201,14 +205,14 @@
 \newcommand{\Signature}{%
     \begin{multicols}{2}
             \noindent
-            Dated: \application@AmendmentDate\\
+            Dated: \@application@AmendmentDate\\
             \columnbreak\\
             Respectfully submitted,\\
-            By \underline{/\application@Author\ \application@AuthorRegistrationNumber/}\\
-            \application@Author\\
-            Registration No.: \application@AuthorRegistrationNumber\\
-            \application@AuthorAddress\\
-            \application@AuthorTelephone\\
+            By \underline{/\@application@Author\ \@application@AuthorRegistrationNumber/}\\
+            \@application@Author\\
+            Registration No.: \@application@AuthorRegistrationNumber\\
+            \@application@AuthorAddress\\
+            \@application@AuthorTelephone\\
             Attorney for Applicant
     \end{multicols}
 }
@@ -222,3 +226,10 @@
 % statutory shorthands
 \newcommand{\ThirtyFiveUSCOneOhTwo}{35 U.S.C. \S{} 102}
 \newcommand{\ThirtyFiveUSCOneOhTwoAOne}{35 U.S.C. \S{} 102(a)(1)}
+
+\newcommand{\claimbreak}{%
+        % put a dashed line between claims in draft mode
+        \if@application@Draft
+                \hdashrule[0.5ex]{.8\textwidth}{1pt}{3mm}
+        \fi
+}
