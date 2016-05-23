@@ -106,9 +106,9 @@
                 \scriptsize{\bf \textemdash{}\ {\em DRAFT\ \textemdash{}\ NOT FOR ENTRY}\ \textemdash{}}\\
                 \fi
                 \ifnum\thepage=1
-                \scriptsize{Docket No.: ******--\@application@DocketNumber\\(PATENT)}
+                \scriptsize{Docket No.: \@application@DocketNumber\\(PATENT)}
                 \else
-                \scriptsize{Docket No.: ******--\@application@DocketNumber}
+                \scriptsize{Docket No.: \@application@DocketNumber}
         \fi}
         \fancyhead[L]{\scriptsize{%
                 Application No. \@application@Number{}\\
@@ -132,8 +132,8 @@
 
 
 
-\newcommand{\Title}[1]{%
-        \section{In the United States Patent and Trademark Office}
+\newcommand{\Title}[3]{%
+        \section{#1}
         \noindent\rule{.5\textwidth}{.2mm}
         \begin{multicols}{2}
                 \noindent
@@ -154,11 +154,8 @@
                 Examiner: \@application@Examiner{}
         \end{multicols}
         \noindent\rule[16pt]{.5\textwidth}{.2mm}
-        \section{#1}
-        \noindent{}MS Amendment\\
-        Commissioner for Patents\\
-        P.O. Box 1450\\
-        Alexandria, VA 22313\textemdash{}1450\\
+        \section{#2}
+        #3
 
         \noindent{}Dear \@application@ExaminerTitle:
 }
@@ -203,6 +200,7 @@
 }
 
 \newcommand{\Signature}{%
+    \vspace{1in}
     \begin{multicols}{2}
             \noindent
             Dated: \@application@AmendmentDate\\
