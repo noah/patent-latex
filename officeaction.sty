@@ -110,10 +110,13 @@
                 \else
                 \scriptsize{Docket No.: \@application@DocketNumber}
         \fi}
-        \fancyhead[L]{\scriptsize{%
+        \fancyhead[L]{% 
+                \ifnum\thepage>1
+                \scriptsize{%
                 Application No. \@application@Number{}\\
                 Amendment dated \@application@AmendmentDate{}\\
                 Reply to Office Action of \@application@NotificationDate{}}
+                \fi
         }
         \fancyfoot[C]{Page\ {\bf \thepage}\ of{\bf~\pageref{LastPage}}}
 }
