@@ -98,6 +98,12 @@
 %\titleformat{\chapter}[block]{\Large\filcenter\bf\underline}{}{0pt}{\uline{\MakeUppercase{#1}}}
 
 %-----------------------------------
+% control quotation sizes (for statutes etc)
+\AtBeginEnvironment{quote}{\footnotesize}
+
+
+
+%-----------------------------------
 
 \fancypagestyle{plain}{%
         \fancyhf{}
@@ -209,7 +215,11 @@
             Dated: \@application@AmendmentDate\\
             \columnbreak\\
             Respectfully submitted,\\
-            By \underline{/\@application@Author\ \@application@AuthorRegistrationNumber/}\\
+            \if@application@Draft
+                    By \underline{/{\em DRAFT\ \textemdash{}\ NOT FOR ENTRY}/}\\
+            \else
+                    By \underline{/\@application@Author\ \@application@AuthorRegistrationNumber/}\\
+            \fi
             \@application@Author\\
             Registration No.: \@application@AuthorRegistrationNumber\\
             \@application@AuthorAddress\\
