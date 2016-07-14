@@ -175,14 +175,17 @@
         In response to the Office Action dated \@application@NotificationDate, please amend
         the above-identified U.S. patent application as follows:
 
-        A {\bf Listing of Claims} reflecting amendments to the claims begins on page~\pageref{claims}.
+        {\bf Amendments to the Specification} begin on
+        page~\pageref{amendspec}.
+
+        {\bf Amendments to the Claims} begin on page~\pageref{amendclaims}.
 
         {\bf Remarks/Arguments} begin on page~\pageref{remarks}.
 }
 
 \newcommand{\Claims}[2]{%
         \pagebreak
-        \section{Listing of Claims}\label{claims}
+        \section{Amendments to the Claims}\label{amendclaims}
         #1
         % http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/enumitem/enumitem.pdf
         \setlength{\parindent}{1in}
@@ -195,6 +198,12 @@
         \begin{enumerate}[itemindent=.5in,labelsep=1cm,listparindent=.5in,parsep=0pt,label={}]
             #1
         \end{enumerate}
+}
+
+\newcommand{\AmendedSpecification}[1]{%
+        \pagebreak
+        \section{Amendments to the Specification}\label{amendspec}
+        #1
 }
 
 
@@ -235,9 +244,11 @@
 \newcommand{\OAem}{\textit{Office Action}}
 
 % statutory shorthands
+\newcommand{\ThirtyFiveUSCOneOhOne}{35 U.S.C. \S{} 101}
 \newcommand{\ThirtyFiveUSCOneOhTwo}{35 U.S.C. \S{} 102}
 \newcommand{\ThirtyFiveUSCOneOhTwoAOne}{35 U.S.C. \S{} 102(a)(1)}
 \newcommand{\ThirtyFiveUSCOneOhTwoE}{35 U.S.C. \S{} 102(e)}
+\newcommand{\ThirtyFiveUSCOneOhThree}{35 U.S.C. \S{} 103}
 
 \newcommand{\claimbreak}{%
         % put a dashed line between claims in draft mode
