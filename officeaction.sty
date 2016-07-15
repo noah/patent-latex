@@ -66,6 +66,7 @@
 \DeclareStringOption{NotificationDate}
 \DeclareStringOption{Title}
 \DeclareStringOption{AmendmentDate}
+\DeclareStringOption{CustomerNumber}
 \DeclareBoolOption{Draft}
 %
 \ProcessKeyvalOptions{application}
@@ -231,6 +232,7 @@
     \begin{multicols}{2}
             \noindent
             Dated: \@application@AmendmentDate\\
+            Customer Number: \@application@CustomerNumber\\
             \columnbreak\\
             Respectfully submitted,\\
             \if@application@Draft
