@@ -66,6 +66,7 @@
 \DeclareStringOption{NotificationDate}
 \DeclareStringOption{Title}
 \DeclareStringOption{AmendmentDate}
+\DeclareStringOption{CustomerNumber}
 \DeclareBoolOption{Draft}
 %
 \ProcessKeyvalOptions{application}
@@ -182,8 +183,9 @@
                 page~\pageref{amendspec}.
         }{}
 
-        \iflabelexists{amendclaims}{%
-                {\bf Amendments to the Claims} begin on page~\pageref{amendclaims}.
+        \iflabelexists{claimslisting}{%
+                A {\bf Listing of Claims} begins on
+                page~\pageref{claimslisting}.
         }{}
 
         \iflabelexists{remarks}{%
@@ -193,12 +195,12 @@
 
 \newcommand{\Claims}[2]{%
         \pagebreak
-        \section{Amendments to the Claims}\label{amendclaims}
+        \section{Listing of Claims}\label{claimslisting}
         #1
         % http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/enumitem/enumitem.pdf
         \setlength{\parindent}{1in}
         \begin{enumerate}[itemindent=1in,labelsep=1cm,listparindent=.5in,parsep=0pt]
-                        #2\\
+                        #2
         \end{enumerate}
 }
 
@@ -230,6 +232,7 @@
     \begin{multicols}{2}
             \noindent
             Dated: \@application@AmendmentDate\\
+            Customer Number: \@application@CustomerNumber\\
             \columnbreak\\
             Respectfully submitted,\\
             \if@application@Draft
