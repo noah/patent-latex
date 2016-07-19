@@ -44,6 +44,9 @@
 \RequirePackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{dashrule}
+\RequirePackage{xstring}
+\RequirePackage{soul}
+\RequirePackage{color}
 %-----------------------------------
 \SetupKeyvalOptions{%
         family=application,
@@ -266,5 +269,24 @@
         % put a dashed line between claims in draft mode
         \if@application@Draft
                 \hdashrule[0.5ex]{.8\textwidth}{1pt}{3mm}
+        \fi
+}
+
+
+% punch up underlining in draft mode
+\DeclareRobustCommand{\hlgray}[1]{{\sethlcolor{gray}\hl{#1}}}
+
+% claim editing commands
+\newcommand{\add}[1]{%
+        \uline{#1}
+}
+\newcommand{\del}[1]{%
+        % do different things with deletion based on the length of the
+        % string being deleted
+        \StrLen{#1}[\arglen]
+        \ifnum\arglen<6
+                [[#1]]
+        \else
+                \st{#1}
         \fi
 }
