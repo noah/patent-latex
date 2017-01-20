@@ -1,0 +1,153 @@
+\RequirePackage{kvoptions-patch} % hack: allow newlines in kvoptions
+\documentclass[11pt,letterpaper,oneside]{article}
+
+\setcounter{secnumdepth}{0} % include unnumbered sections in ToC (and thereby, in PDF index)
+
+\newcommand{\NotificationDate}{February 26, 2016}
+
+\usepackage[
+        Author={John A. Practitioner},
+        AuthorRegistrationNumber={\#nn,nnn},
+        AuthorAddress={Patent Firm\\
+                       1600 Pennsylvania Ave NW\\
+                       Washington, DC 20006},
+        AuthorTelephone={(800) PAT-ENTS},
+        Number={NN/NNN,NNN},
+        FilingDate={January 1, 1970},
+        FirstNamedInventorFirstName=John,
+        FirstNamedInventorLastName=Browning,
+        DocketNumber={XXXXX-XX},
+        ConfirmationNumber=XXXX,
+        Examiner={Suzy Q.},
+        ExaminerTitle=Madam,
+        ArtUnit=XXXX,
+        NotificationDate={\NotificationDate},
+        Title={METHODS AND SYSTEMS FOR PERPETUAL MOTION MACHINE},
+        AmendmentDate={\today} %, % FIXME
+        %Draft
+]{officeaction}
+
+
+% prior art short names
+\newcommand{\xxxx}{{\em XXXX}\ }
+\newcommand{\yyyy}{{\em YYYY}\ }
+
+\begin{document}
+
+
+\Title
+        {In the United States Patent and Trademark Office}
+        {Response to Non-Final Office Action of \NotificationDate{}}
+        {\noindent{}MS Amendment\\
+        Commissioner for Patents\\
+        P.O. Box 1450\\
+        Alexandria, VA 22313\textemdash{}1450\\}
+
+
+\Intro
+
+\Claims{%
+        This listing of the claims replaces all prior versions and listings of
+        the claims in the application.
+}{%
+\input{claims/01}
+
+\claimbreak
+\input{claims/04}
+
+\claimbreak
+\input{claims/09}
+
+\claimbreak
+\input{claims/12}
+
+\claimbreak
+\input{claims/17}
+
+\claimbreak
+\input{claims/19}
+
+\claimbreak
+\input{claims/24}
+
+\claimbreak
+\input{claims/26}
+
+\claimbreak
+\noindent{}Claims 31\textemdash{}82 (Canceled)
+}
+
+
+\Remarks{}{%
+
+\subsection{Statement of Substance of Examiner Interview}
+
+Applicant expresses sincere gratitude to Examiner Wang for the
+courtesies extended to Applicant during the interview of XXXX.
+The Examiner and Applicant's representatives discussed the invention,
+the rejection under \ThirtyFiveUSCOneOhTwo{} and differences between the
+invention and the cited prior art.  Applicant has amended the claims.
+
+\subsection{Status of the claims}
+
+At the time of the \OAem{}, claims ... were pending in the
+application...
+
+\subsubsection{Rejections and objections}
+Claims ... stand rejected under
+\ThirtyFiveUSCOneOhTwoAOne{} as allegedly anticipated by ...
+
+Claims ...  stand objected to as depending from
+a rejected base claim.
+
+\subsubsection{Allowable Subject Matter}
+
+The \OAem{} indicates that rewriting dependent claims ...  would place
+claims ...  Applicant has rewritten these claims as recommended and
+requests that the amended claims be allowed.
+
+\subsubsection{Claim amendments}
+
+Applicant herein amends independent claims ...; and rewrites dependent
+claims ... in independent form including the limitations of each
+respective dependent claim's base and intervening claims.
+
+Applicant's claim amendments are supported by the application as
+originally filed, for example at ...
+
+
+%-----------------------------------------------------------------------
+\subsubsection{Claim 1}
+
+\input{argument/xxxx}
+\input{argument/yyyy}
+
+
+\subsubsection{Claims ...}
+
+Regarding both \xxxx and \yyyy; each of independent
+claims ... recite similar elements to those described above
+with respect to claim 1.  Accordingly neither reference anticipates
+those claims, and therefore, Applicant requests reconsideration and
+withdrawal of the rejections.
+
+Further, with respect to both \xxxx and \yyyy...
+
+\section{Conclusion}
+
+For the foregoing reasons, Applicant considers this application in good
+and proper form for allowance.  The Examiner is respectfully requested
+to pass this application to issue.  If in the Examiner's opinion a
+telephone conference would expedite the prosecution of the subject
+application then the Examiner is invited to call the undersigned
+attorney.\\
+
+
+} % REMARKS
+
+\Signature
+
+
+%\tableofcontents
+
+\end{document}
